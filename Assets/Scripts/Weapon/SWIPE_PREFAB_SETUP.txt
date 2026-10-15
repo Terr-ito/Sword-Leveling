@@ -1,0 +1,173 @@
+/*
+ * SWORD SWIPE PREFAB - SETUP GUIDE
+ * 
+ * This document explains how to create and configure a sword swipe prefab for the SwordWeapon system.
+ * 
+ * WHAT IS A PREFAB?
+ * A prefab is a reusable GameObject template. Once created, you can spawn multiple instances
+ * with the same configuration. This allows for consistent, optimized swipes.
+ * 
+ * ==================================================================================
+ * STEP 1: CREATE THE BASE GAME OBJECT
+ * ==================================================================================
+ * 
+ * 1. In Unity Editor, right-click in the Hierarchy window
+ * 2. Select "2D Object" → "Sprites" → "Circle"
+ *    (If no Circle sprite exists, use "Square" and we'll make it circular via collider)
+ * 3. Name it "SwordSwipePrefab"
+ * 4. Reset its transform (Inspector → Transform → ⋮ → Reset)
+ * 
+ * ==================================================================================
+ * STEP 2: CONFIGURE THE SPRITE RENDERER
+ * ==================================================================================
+ * 
+ * The Sprite Renderer component displays the visual swipe:
+ * 
+ * 1. In Inspector, find "Sprite Renderer" component
+ * 2. Settings:
+ *    • Sprite: Select a Circle sprite (use built-in or create one)
+ *    • Color: Set to (1, 0.8, 0.3, 0.6) [Golden yellow with transparency]
+ *    • Sorting Order: 0 (render on top of background)
+ *    • Flip X/Y: False
+ *    • Material: Default (Sprites/Default)
+ * 
+ * OPTIONAL - Make it more visible:
+ * • Try color (1, 1, 0, 0.5) for bright yellow
+ * • Or (0.9, 0.7, 0.2, 0.7) for more orange-gold
+ * 
+ * ==================================================================================
+ * STEP 3: ADD CIRCLE COLLIDER 2D (HITBOX)
+ * ==================================================================================
+ * 
+ * This is the damage zone that detects enemy collisions:
+ * 
+ * 1. In Inspector, click "Add Component"
+ * 2. Search for "Circle Collider 2D" and add it
+ * 3. Configuration:
+ *    • Offset X: 0
+ *    • Offset Y: 0
+ *    • Radius: 2.5 (this will be overridden by SwordSwipe.cs based on range stat)
+ *    • Is Trigger: TRUE ✓ (IMPORTANT - must be checked!)
+ * 
+ * WHY IS TRIGGER IMPORTANT?
+ * • Trigger colliders detect collisions but don't have physical interaction
+ * • They allow us to detect enemies without bouncing them around
+ * • The SwordSwipe component will automatically adjust the radius
+ * 
+ * ==================================================================================
+ * STEP 4: ADD TRAIL RENDERER (MOTION EFFECT)
+ * ==================================================================================
+ * 
+ * This creates the trailing effect as the swipe animates:
+ * 
+ * 1. Click "Add Component"
+ * 2. Search for "Trail Renderer" and add it
+ * 3. Configuration:
+ *    • Time: 0.15
+ *    • Start Width: 0.5
+ *    • End Width: 0.1
+ *    • Min Vertex Distance: 0.1
+ *    • Alignment: "View"
+ * 
+ * Trail Material:
+ *    • Material: Create a new material or use "Sprites/Default"
+ * 
+ * Colors:
+ *    • Start Color: (1, 0.8, 0.3, 0.8) [Golden, opaque]
+ *    • End Color: (1, 0.8, 0.3, 0) [Golden, transparent]
+ * 
+ * ==================================================================================
+ * STEP 5: ADD SWORD SWIPE SCRIPT
+ * ==================================================================================
+ * 
+ * 1. In Inspector, click "Add Component"
+ * 2. Search for "Sword Swipe" and add the SwordSwipe.cs script
+ * 3. No configuration needed - it initializes itself!
+ * 
+ * ==================================================================================
+ * STEP 6: OPTIONAL - ADD AUDIO SOURCE
+ * ==================================================================================
+ * 
+ * For sound effects:
+ * 
+ * 1. Click "Add Component"
+ * 2. Search for "Audio Source" and add it
+ * 3. Configuration:
+ *    • Audio Clip: (Leave empty for now - can add later)
+ *    • Spatial Blend: 1 (3D audio)
+ *    • Volume: 0.8
+ *    • Pitch: 1
+ *    • Play On Awake: False (we'll play it with code)
+ * 
+ * ==================================================================================
+ * STEP 7: SAVE AS PREFAB
+ * ==================================================================================
+ * 
+ * 1. Create a folder in your project:
+ *    Right-click in Project window → Create Folder
+ *    Rename to "Prefabs"
+ * 
+ * 2. Inside Prefabs folder, create "Weapon" subfolder
+ *    (Create Folder inside Prefabs)
+ * 
+ * 3. Drag the "SwordSwipePrefab" from Hierarchy into:
+ *    Assets/Prefabs/Weapon/
+ *    
+ * 4. You'll see it turn blue in the Hierarchy - it's now a prefab!
+ * 
+ * ==================================================================================
+ * STEP 8: ASSIGN TO SWORD WEAPON
+ * ==================================================================================
+ * 
+ * 1. Select your Player GameObject in the scene
+ * 2. In Inspector, find the "Sword Weapon" script component
+ * 3. Drag the prefab from Project → Prefabs/Weapon/SwordSwipePrefab
+ *    into the "Swipe Prefab" field
+ * 
+ * 4. Optional: Assign a Transform as "Swipe Spawn Point"
+ *    (Set to the player's hand position if you have one)
+ * 
+ * ==================================================================================
+ * FINAL CHECKLIST
+ * ==================================================================================
+ * 
+ * ✓ Sprite Renderer configured with golden-yellow color
+ * ✓ Circle Collider 2D set to "Is Trigger"
+ * ✓ Trail Renderer added with fade colors
+ * ✓ SwordSwipe.cs component added
+ * ✓ Saved as prefab in Assets/Prefabs/Weapon/
+ * ✓ Assigned to SwordWeapon component's "Swipe Prefab" field
+ * 
+ * ==================================================================================
+ * ALTERNATIVE: NO PREFAB (DYNAMIC CREATION)
+ * ==================================================================================
+ * 
+ * If you don't create a prefab:
+ * • Leave "Swipe Prefab" field empty in SwordWeapon
+ * • The system will automatically create swipes dynamically every attack
+ * • Slightly less performant but still works!
+ * 
+ * ==================================================================================
+ * TROUBLESHOOTING
+ * ==================================================================================
+ * 
+ * PROBLEM: Swipe doesn't appear
+ * SOLUTION: 
+ *   • Check Sprite Renderer color isn't fully transparent (alpha > 0)
+ *   • Check Sorting Order isn't behind other objects
+ *   • Make sure GameObject is active (not grayed out in Hierarchy)
+ * 
+ * PROBLEM: Swipe doesn't hit enemies
+ * SOLUTION:
+ *   • Check Circle Collider2D "Is Trigger" is TRUE
+ *   • Check enemy has a Rigidbody2D component
+ *   • Check enemy has IDamageable interface implemented
+ *   • Check enemy isn't on the same collider layer as swipe
+ * 
+ * PROBLEM: Swipe persists too long
+ * SOLUTION:
+ *   • Edit SwordSwipe.cs, find "lifetime = 0.3f"
+ *   • Reduce to 0.2f for faster despawn or 0.5f for longer effect
+ * 
+ * ==================================================================================
+ */
