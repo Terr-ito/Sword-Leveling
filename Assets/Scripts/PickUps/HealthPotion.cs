@@ -1,7 +1,7 @@
 using UnityEditor.Build;
 using UnityEngine;
 
-public class HealthPotion : MonoBehaviour, ICollectible
+public class HealthPotion : Pickup, ICollectible
 {
     public int healthToRestore;
 
@@ -9,6 +9,5 @@ public class HealthPotion : MonoBehaviour, ICollectible
     {
         PlayerStats player = Object.FindAnyObjectByType<PlayerStats>();
         player.RestoreHealth(healthToRestore);
-        Destroy(gameObject);
     }
 }

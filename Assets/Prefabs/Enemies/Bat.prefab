@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72affe0c57857c46a014dc531c2b1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  enemyData: {fileID: 11400000, guid: beb48876931e99b46b225819108f488d, type: 2}
 --- !u!114 &3289515448714854752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   enemyData: {fileID: 11400000, guid: beb48876931e99b46b225819108f488d, type: 2}
+  currentMoveSpeed: 0
+  currentHealth: 0
+  currentDamage: 0
 --- !u!114 &-4979672554717883253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,4 +208,4 @@ MonoBehaviour:
   drops:
   - itemName: Blue Gem
     itemPrefab: {fileID: 7762156198739365856, guid: 0949bf58603828e43ae7fbc9984ec181, type: 3}
-    dropRate: 50
+    dropRate: 99
