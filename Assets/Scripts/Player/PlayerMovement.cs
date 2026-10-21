@@ -4,11 +4,14 @@ public class PlayerMovement : MonoBehaviour
 {
     // Movement
     public float moveSpeed;
-    Rigidbody2D rb;
     [HideInInspector]
     public Vector2 moveDir;
     [HideInInspector]
     public Vector2 lastMovedVector;
+
+    // References
+    Rigidbody2D rb;
+    public CharacterScriptableObject characterData;
 
     void Start()
     {
@@ -37,6 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+        rb.linearVelocity = new Vector2(moveDir.x * characterData.MoveSpeed, moveDir.y * characterData.MoveSpeed);
     }
 }

@@ -81,14 +81,23 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Euler(rotation);    //Can't simply set the vector because cannot convert
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D col)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         //Reference the script from the collided collider and deal damage using TakeDamage()
-        if (col.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            EnemyStats enemy = col.GetComponent<EnemyStats>();
+            EnemyStats enemy = collision.GetComponent<EnemyStats>();
             enemy.TakeDamage(currentDamage);    //Make sure to use currentDamage instead of weaponData.Damage in case any damage multipliers in the future
             ReducePierce();
+        }
+
+        else if (collision.CompareTag("Prop"))
+        {
+            if (collision.gameObject.TryGetComponent<BreakableProps>(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(currentDamage);
+                ReducePierce();
+            }
         }
     }
 
