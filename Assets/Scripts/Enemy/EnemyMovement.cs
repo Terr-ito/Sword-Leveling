@@ -1,18 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Transform target;
-    public float moveSpeed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public EnemyScriptableObject enemyData;
+    Transform player;
+
+
     void Start()
     {
-        target = Object.FindAnyObjectByType<PlayerMovement>().transform;
+        player = Object.FindAnyObjectByType<PlayerMovement>().transform;
     }
 
-    // Update is called once per frame
-    void Update()   
+    void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.MoveSpeed * Time.deltaTime);    //Constantly move the enemy towards the player
     }
 }

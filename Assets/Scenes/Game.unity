@@ -2474,7 +2474,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000045627a498718e50f2b583824i
+  m_ApplyToSortingLayers: 0000000045627a498718e50f2b583824e7cf163c03223e5ci
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2724,6 +2724,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462787446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1146604049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146604050}
+  - component: {fileID: 1146604051}
+  m_Layer: 0
+  m_Name: GarlicController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146604050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146604049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1535644475}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1146604051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146604049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4129d19356b589d4a8425c890631707d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GarlicController
+  weaponData: {fileID: 11400000, guid: 45341d80e418caf44beba9244d88798a, type: 2}
 --- !u!1 &1349356715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +2870,6 @@ GameObject:
   - component: {fileID: 1535644476}
   - component: {fileID: 1535644480}
   - component: {fileID: 1535644479}
-  - component: {fileID: 1535644481}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2879,7 +2923,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1232757317
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2326351578401158943, guid: 611dfaf1aa918024c9ca7880faf3601d, type: 3}
@@ -2905,7 +2949,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1774141379}
+  - {fileID: 1146604050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1535644476
@@ -2922,6 +2968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   moveDir: {x: 0, y: 0}
+  lastMovedVector: {x: 0, y: 0}
 --- !u!61 &1535644477
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3029,20 +3076,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e9a9cc6d7ae24b8fc4e277a9b67a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
---- !u!114 &1535644481
+--- !u!1 &1774141378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774141379}
+  - component: {fileID: 1774141380}
+  m_Layer: 0
+  m_Name: Spear Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1774141379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774141378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1535644475}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1774141380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535644473}
+  m_GameObject: {fileID: 1774141378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568e7a54969be7241878a3b8e49850d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 31166116f3d97b8459909b14a29d30e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordWeapon
-  swipePrefab: {fileID: 3159551662445702325, guid: 83f1ef3112f5eac47b2fa39f80ccf8f8, type: 3}
-  swipeSpawnPoint: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::SpearController
+  weaponData: {fileID: 11400000, guid: 06e1a998d708f6449b82a3fb02976967, type: 2}
 --- !u!1 &1857713781
 GameObject:
   m_ObjectHideFlags: 0
