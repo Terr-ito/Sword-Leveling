@@ -7,9 +7,13 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     [HideInInspector]
     public Vector2 moveDir;
+    [HideInInspector]
+    public Vector2 lastMovedVector;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lastMovedVector = new Vector2(1, 0f);
     }
 
     void Update()
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         moveDir = new Vector2(moveX, moveY).normalized;
+        lastMovedVector = moveDir != Vector2.zero ? moveDir : lastMovedVector;
     }
 
     void Move()

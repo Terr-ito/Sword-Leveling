@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7465795569128966583}
   - component: {fileID: 3865656063619275024}
+  - component: {fileID: -7309230924717159281}
   m_Layer: 0
   m_Name: terrain_11
   m_TagString: Untagged
@@ -92,3 +93,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!65 &-7309230924717159281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442214351184256428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.65625, y: 0.34375, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
