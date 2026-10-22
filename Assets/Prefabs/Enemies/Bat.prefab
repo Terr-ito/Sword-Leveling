@@ -193,6 +193,7 @@ MonoBehaviour:
   currentMoveSpeed: 0
   currentHealth: 0
   currentDamage: 0
+  despawnDistance: 30
 --- !u!114 &-4979672554717883253
 MonoBehaviour:
   m_ObjectHideFlags: 0
