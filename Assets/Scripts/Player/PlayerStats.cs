@@ -168,11 +168,10 @@ public class PlayerStats : MonoBehaviour
 
         // Spawn the weapons
         SpawnWeapon(characterData.StartingWeapon);
-        SpawnWeapon(secondWeaponTest);
 
         // Spawn the passive items
         SpawnPassiveItem(firstPassiveItem);
-        SpawnPassiveItem(secondPassiveItem);
+        //SpawnPassiveItem(secondPassiveItem);
     }
 
     void Start()
@@ -216,8 +215,8 @@ public class PlayerStats : MonoBehaviour
             level++;
             experience -= experienceCap;
             experienceCap += experienceCapIncrease;
-            // You can add additional logic here for what happens when the player levels up
-            // For example, you might want to increase the player's stats or unlock new abilities
+            
+            GameManager.instance.StartLevelUp();
         }
     }
 
@@ -235,6 +234,12 @@ public class PlayerStats : MonoBehaviour
                 Die();
             }
         }   
+    }
+
+    // for button to call this function
+    public void ButtonDie()
+    {
+        Die();
     }
 
     public void Die()

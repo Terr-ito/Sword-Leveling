@@ -19,4 +19,6 @@ MonoBehaviour:
   pierce: 0
   level: 1
   nextLevelPrefab: {fileID: 8350251963460373557, guid: 63acd59adf7c4cf419f8f2118386b7d6, type: 3}
+  name: Spear
+  description: Throws spears in the direction the player is facing
   icon: {fileID: -1666055988, guid: f9520aa1cac28ea4a879f96df5e13c86, type: 3}
