@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public List<WeaponController> weaponSlots = new List<WeaponController>(6);
-    public int[] weaponLevels = new int[6];
+    public List<WeaponController> weaponSlots = new List<WeaponController>(3);
+    public int[] weaponLevels = new int[3];
     public List<Image> weaponUISlots = new List<Image>(3);
 
-    public List<PassiveItem> passiveItemSlots = new List<PassiveItem>(6);
-    public int[] passiveItemLevels = new int[6];
+    public List<PassiveItem> passiveItemSlots = new List<PassiveItem>(3);
+    public int[] passiveItemLevels = new int[3];
     public List<Image> passiveItemUISlots = new List<Image>(3);
 
     public void AddWeapon(int slotIndex, WeaponController weapon)

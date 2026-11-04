@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa86d1b1a3b602545aeff0e02b82eba9, type: 3}
   m_Name: Garlic Character
   m_EditorClassIdentifier: Assembly-CSharp::CharacterScriptableObject
+  icon: {fileID: -8608430481783622962, guid: 611dfaf1aa918024c9ca7880faf3601d, type: 3}
+  name: Garlic Character
   startingWeapon: {fileID: 1998705366168823301, guid: cbce74e3c7c5ce44bbfbae298d197331, type: 3}
   maxHealth: 1000
   recovery: 1
   moveSpeed: 5
-  might: 0
-  projectileSpeed: 0
+  might: 2
+  projectileSpeed: 1
   magnet: 1.6

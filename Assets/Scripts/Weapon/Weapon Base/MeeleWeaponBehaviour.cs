@@ -25,6 +25,11 @@ public class MeleeWeaponBehaviour : MonoBehaviour
         currentPierce = weaponData.Pierce;
     }
 
+    public float getCurrentDamage()
+    {
+        return currentDamage *= FindAnyObjectByType<PlayerStats>().CurrentMight;
+    }
+
     protected virtual void Start()
     {
         Destroy(gameObject, destroyAfterSeconds);
