@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717afa77a0684624d8f583315eaa73c7, type: 3}
   m_Name: Spear Weapon Level 2
   m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptableObject
-  prefab: {fileID: 2691706062788039824, guid: 65222fc8c5eafc149b1217059f7b1b03, type: 3}
-  damage: 10
+  prefab: {fileID: 2691706062788039824, guid: c0db32af3c7ece343b15fc59b0f8ee9f, type: 3}
+  damage: 5
   speed: 10
   cooldownDuration: 1
   pierce: 0
   level: 2
-  nextLevelPrefab: {fileID: 0}
+  nextLevelPrefab: {fileID: 8350251963460373557, guid: 8dae9a44e86ab7d4397daa0673e8bae8, type: 3}
   name: Spear Level 2
   description: Speed up by 5
   icon: {fileID: -1666055988, guid: f9520aa1cac28ea4a879f96df5e13c86, type: 3}

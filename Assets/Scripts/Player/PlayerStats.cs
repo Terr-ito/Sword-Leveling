@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -148,6 +149,12 @@ public class PlayerStats : MonoBehaviour
     public int weaponIndex;
     public int passiveItemIndex;
 
+    [Header("UI")]
+    public Image healthBar;
+    public Text healthText;
+    public Image expBar;
+    public Text levelText;
+
     public GameObject secondWeaponTest;
     public GameObject firstPassiveItem, secondPassiveItem;
 
@@ -185,6 +192,12 @@ public class PlayerStats : MonoBehaviour
 
         //Moved it to Die() function because it isn't working here for wtf reason
         //GameManager.instance.AssignChosenCharacterUI(characterData.Icon, characterData.Name);
+
+        UpdateHealthBar();
+        UpdateHealthText();
+        UpdateLevelText();
+        UpdateExpBar();
+
     }
     private void Update()
     {
@@ -206,6 +219,8 @@ public class PlayerStats : MonoBehaviour
         experience += amount;
 
         levelUpChecker();
+
+        UpdateExpBar();
     }
 
     void levelUpChecker()
@@ -215,9 +230,21 @@ public class PlayerStats : MonoBehaviour
             level++;
             experience -= experienceCap;
             experienceCap += experienceCapIncrease;
-            
+
+            UpdateLevelText();
+
             GameManager.instance.StartLevelUp();
         }
+    }
+
+    void UpdateExpBar()
+    {
+        expBar.fillAmount = (float)experience / experienceCap;
+    }
+
+    void UpdateLevelText()
+    {
+        levelText.text = "Level " + level.ToString();
     }
 
     public void TakeDamage(float dmg)
@@ -233,13 +260,20 @@ public class PlayerStats : MonoBehaviour
             {
                 Die();
             }
-        }   
+        }
+
+        UpdateHealthBar();
+        UpdateHealthText();
     }
 
-    // for button to call this function
-    public void ButtonDie()
+    void UpdateHealthBar()
     {
-        Die();
+        healthBar.fillAmount = CurrentHealth / characterData.MaxHealth;
+    }
+
+    void UpdateHealthText()
+    {
+        healthText.text = CurrentHealth.ToString() + "/" + characterData.MaxHealth.ToString();
     }
 
     public void Die()
