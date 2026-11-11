@@ -2233,6 +2233,7 @@ MonoBehaviour:
   - {fileID: 1587117872109947307, guid: 3621fd8763b43c041976b332fd973359, type: 3}
   - {fileID: 2569034268853362001, guid: af0e0a299a6b4ba4aa98437f063aa3f6, type: 3}
   - {fileID: 1442214351184256428, guid: 56f9d7720de78e1418adf089f9fffce2, type: 3}
+  - {fileID: 9056289661003703863, guid: 411427e445f1f0a4aa1946b22b334d77, type: 3}
 --- !u!61 &743872846553310490
 BoxCollider2D:
   m_ObjectHideFlags: 0

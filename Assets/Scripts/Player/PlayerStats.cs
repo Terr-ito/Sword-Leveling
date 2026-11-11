@@ -203,6 +203,7 @@ public class PlayerStats : MonoBehaviour
     {
         passiveRecovery();
 
+
         if (invicibilityTimer > 0)
         {
             invicibilityTimer -= Time.deltaTime;
@@ -249,6 +250,14 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        // Check if God Mode is enabled via the debug menu
+        DebugMenuManager debugMenu = Object.FindAnyObjectByType<DebugMenuManager>();
+        if (debugMenu != null && debugMenu.IsGodMode)
+        {
+            Debug.Log("Damage blocked by God Mode!");
+            return;
+        }
+
         if(!isInvincible)
         {
             CurrentHealth -= dmg;
@@ -262,8 +271,6 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        UpdateHealthBar();
-        UpdateHealthText();
     }
 
     void UpdateHealthBar()
@@ -273,7 +280,7 @@ public class PlayerStats : MonoBehaviour
 
     void UpdateHealthText()
     {
-        healthText.text = CurrentHealth.ToString() + "/" + characterData.MaxHealth.ToString();
+        healthText.text = ((int)CurrentHealth).ToString() + "/" + characterData.MaxHealth.ToString();
     }
 
     public void Die()
@@ -309,6 +316,8 @@ public class PlayerStats : MonoBehaviour
             {
                 CurrentHealth = characterData.MaxHealth;
             }
+            UpdateHealthBar();
+            UpdateHealthText();
         }
     }
 
