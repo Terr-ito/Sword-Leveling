@@ -238,6 +238,15 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void HideHUD()
+    {
+        healthBar.gameObject.SetActive(false);
+        healthText.gameObject.SetActive(false);
+        expBar.gameObject.SetActive(false);
+        expBar.transform.parent.gameObject.SetActive(false); // Disable the parent (border)
+        levelText.gameObject.SetActive(false);
+    }
+
     void UpdateExpBar()
     {
         expBar.fillAmount = (float)experience / experienceCap;

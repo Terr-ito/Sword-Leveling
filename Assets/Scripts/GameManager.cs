@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
     public List<Image> chosenWeaponUI = new List<Image>(3);
     public List<Image> chosenPassiveItemsUI = new List<Image>(3);
 
+    [Header("Highscore")]
+    public Text highscoreDisplay; // Text to display top 3 highscores
+    public GameObject nameInputPanel; // Panel with input field for player name
+    public InputField playerNameInputField; // Input field for player name
+
     [Header("Stopwatch")]
     public float timeLimit; // The time limit in seconds
     float stopwatchTime; // The current time on the stopwatch
@@ -71,6 +76,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // Check if game should end (no more spawning + debug menu not open)
+        if (!isGameOver && ShouldGameEnd())
+        {
+            GameOver();
+        }
+
         // Define the behaviour for each state
         switch (currentState)
         {
@@ -164,6 +175,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         timeSurvivedDisplay.text = stopwatchDisplay.text;
+        playerObject.SendMessage("Die");
         ChangeState(GameState.GameOver);
         Debug.Log("Game Over");
     }
@@ -171,6 +183,100 @@ public class GameManager : MonoBehaviour
     void DisplayResults()
     {
         resultsScreen.SetActive(true);
+
+        // Hide all in-game HUD elements
+        PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
+        if (playerStats != null)
+        {
+            playerStats.HideHUD();
+        }
+
+        // Display highscores
+        DisplayHighscores();
+
+        // Check if player qualifies for highscore
+        string currentTime = timeSurvivedDisplay.text;
+        int position = HighscoreManager.instance.CheckHighscorePosition(currentTime);
+
+        if (position != -1)
+        {
+            Debug.Log($"Player qualifies for highscore at position {position}");
+            ShowNameInputPanel();
+        }
+        else
+        {
+            Debug.Log("Player did not qualify for highscore");
+        }
+    }
+
+    void DisplayHighscores()
+    {
+        if (highscoreDisplay == null)
+            return;
+
+        List<string> highscores = HighscoreManager.instance.GetFormattedHighscores();
+
+        if (highscores.Count == 0)
+        {
+            highscoreDisplay.text = "No Highscores Yet";
+            return;
+        }
+
+        string highscoreText = "=== HIGHSCORES ===\n";
+        foreach (string entry in highscores)
+        {
+            highscoreText += entry + "\n";
+        }
+
+        highscoreDisplay.text = highscoreText;
+    }
+
+    void ShowNameInputPanel()
+    {
+        if (nameInputPanel != null && playerNameInputField != null)
+        {
+            nameInputPanel.SetActive(true);
+            playerNameInputField.text = "";
+            playerNameInputField.ActivateInputField();
+        }
+    }
+
+    public void SubmitHighscore()
+    {
+        if (playerNameInputField == null || playerNameInputField.text.Length == 0)
+        {
+            Debug.LogWarning("Player name is empty!");
+            return;
+        }
+
+        string playerName = playerNameInputField.text;
+        string time = timeSurvivedDisplay.text;
+
+        HighscoreManager.instance.AddHighscore(playerName, time);
+
+        // Refresh highscore display
+        DisplayHighscores();
+
+        // Hide name input panel
+        if (nameInputPanel != null)
+        {
+            nameInputPanel.SetActive(false);
+        }
+    }
+
+    bool ShouldGameEnd()
+    {
+        EnemySpawner spawner = Object.FindAnyObjectByType<EnemySpawner>();
+        DebugMenuManager debugMenu = Object.FindAnyObjectByType<DebugMenuManager>();
+
+        if (spawner == null)
+            return false;
+
+        // Check if spawning is complete and debug menu is closed
+        bool spawnComplete = spawner.IsSpawningComplete();
+        bool debugMenuActive = (debugMenu != null && debugMenu.MenuOpen);
+
+        return spawnComplete && !debugMenuActive;
     }
 
     public void AssignChosenCharacterUI(Sprite icon, string name)

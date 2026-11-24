@@ -125,4 +125,15 @@ public class EnemySpawner : MonoBehaviour
     {
         enemiesAlive--;
     }
+
+    /// <summary>
+    /// Returns true if all waves have spawned and no more enemies exist
+    /// </summary>
+    public bool IsSpawningComplete()
+    {
+        // Check if we're past the last wave and no enemies are alive
+        return currentWaveIndex >= waves.Count - 1 && 
+               waves[currentWaveIndex].spawnCount >= waves[currentWaveIndex].waveQuota && 
+               enemiesAlive == 0;
+    }
 }

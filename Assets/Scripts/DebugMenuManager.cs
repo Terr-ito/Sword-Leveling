@@ -18,6 +18,8 @@ public class DebugMenuManager : MonoBehaviour
     private bool isGodMode = false;
     private PlayerStats playerStats;
 
+    public bool MenuOpen => menuOpen; // Public property to check if menu is open
+
     private void Start()
     {
         // Get the player stats from the player object in GameManager
